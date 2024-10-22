@@ -24,22 +24,22 @@ CREATE TABLE Pedido_venda(
 )
 
 INSERT INTO Carro (marca, modelo, ano, cor)
-VALUES 	('VOLKSWAGEN', 'Jetta', 2019, 'Branco'),
-		('NISSAN', 'SENTRA', 2015, 'Branco'),
-		('HONDA', 'CIVIC G10', 2021, 'Preto'),
-		('HONDA', 'CIVIC TYPE R', 2024, 'Preto'),
-		('AUDI', 'A3', 2024, 'Branco')
+VALUES 	('FORD', 'Focus', 2020, 'Azul'),
+		('TOYOTA', 'Corolla', 2018, 'Prata'),
+		('CHEVROLET', 'Onix', 2022, 'Vermelho'),
+		('HYUNDAI', 'Elantra', 2023, 'Cinza'),
+		('KIA', 'Seltos', 2024, 'Verde');
 
 INSERT INTO cliente (nome, cpf, telefone)
-VALUES 	('Pedro', '15569948303', '16 992800976'),
-		('Gabriel', '24787654345', '16 993100230'),
-		('Victor', '23309874503', '16 993203040'),
-		('Jõao', '47799886838', '16 996301067'),
-		('Yago', '47799828803', '16 996264015')
+VALUES 	('Ana', '12345678901', '16 991234567'),
+		('Lucas', '98765432100', '16 992345678'),
+		('Mariana', '23456789012', '16 993456789'),
+		('Fernanda', '34567890123', '16 994567890'),
+		('Rafael', '45678901234', '16 995678901');
 
 INSERT INTO Pedido_venda (id_cliente, id_carro, data_pedido, valor_pedido)
-VALUES 	( 1, 1, '29/07/2024', 145.490),
-		( 2, 2, '17/11/2024', 54.000),
-		(3, 3, '04/10/2024', 228.000),
-		(4, 4, '01/10/2024', 410.000),
-		(5, 5, '04/11/2024', 227.990)
+VALUES 	( 1, 1, '10/08/2024', 120.000),
+		( 2, 2, '15/09/2024', 85.000),
+		( 3, 3, '20/07/2024', 95.000),
+		( 4, 4, '12/10/2024', 150.000),
+		( 5, 5, '30/11/2024', 190.000);
