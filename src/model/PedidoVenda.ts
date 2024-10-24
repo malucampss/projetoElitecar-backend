@@ -2,7 +2,7 @@
  * Classe que representa um Pedido de venda de um carro.
  */
 
-import { DatabaseModel } from "./DatabaseModel";
+import { DatabaseModel } from "./DatebaseModel";
 const database =  new DatabaseModel().pool;
 
 export class PedidoVenda {
@@ -136,7 +136,7 @@ export class PedidoVenda {
     * @returns {Promise<Array<PedidoVenda> | null>} Retorna uma lista de objetos `PedidoVenda` 
     * em caso de sucesso, ou `null` em caso de erro.
     */
-    static async listarPedidoVenda(): Promise<Array<PedidoVenda> | null>{
+    static async listagemPedidos(): Promise<Array<PedidoVenda> | null>{
         //criando lista vazia para armazenar as pessoas
         let listaDePedidoVenda: Array<PedidoVenda> = [];
         
@@ -190,7 +190,7 @@ export class PedidoVenda {
      * @throws {Error} - Se ocorrer algum erro durante a execução do cadastro, uma mensagem de erro é exibida
      *                   no console junto com os detalhes do erro.
      */
-    static async cadastroPedidoVenda(pedidoVenda: PedidoVenda): Promise<boolean> {
+    static async cadastroPedido(pedidoVenda: PedidoVenda): Promise<boolean> {
         try {
             // query para fazer insert de um carro no banco de dados
             const queryInsertPedidoVenda = `INSERT INTO pedido_venda (id_carro, id_cliente, data_pedido, valor_pedido )

@@ -2,7 +2,7 @@
  * Classe que representa um cliente.
  */
 
-import { DatabaseModel } from "./DatabaseModel";
+import { DatabaseModel } from "./DatebaseModel";
 
 const database =  new DatabaseModel().pool;
 
@@ -121,7 +121,7 @@ export class Cliente {
     * @returns {Promise<Array<Cliente> | null>} Retorna uma lista de objetos `Cliente` 
     * em caso de sucesso, ou `null` em caso de erro.
     */
-    static async listarCliente(): Promise<Array<Cliente> | null> {
+    static async listagemClientes(): Promise<Array<Cliente> | null> {
         //criando lista vazia para armazenar os clientes
         let listaDeCliente: Array<Cliente> = [];
 

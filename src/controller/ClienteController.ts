@@ -28,7 +28,7 @@ class ClienteController extends Cliente{
     static async todos(req: Request, res: Response) {
         try {
             // Chama o método herdado de listar todos os clientes
-            const listaDeClientes =  await Cliente.listarCliente();
+            const listaDeClientes =  await Cliente.listagemClientes();
 
             // Responde com o status 200 e a lista de clientes em formato JSON
             res.status(200).json(listaDeClientes)
