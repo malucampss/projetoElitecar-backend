@@ -205,6 +205,49 @@ export class Cliente {
             return false;
         }
     }
+
+    static async removerCliente(idCliente: number): Promise<boolean> {
+        try{
+            const queryDeleteCliente = `DELETE FROM clinte WHERE id_cliente = ${idCliente}`;
+            const respostaDB = await database.query(queryDeleteCliente);
+
+            if(respostaDB.rowCount != 0){
+                console.log(`Clinte removido com sucesso. ID removido: ${idCliente}`);
+                return true;
+            }
+            return false;
+
+        } catch (error) {
+            console.log(`Erro ao remover cliente. Verifique os logs para mais detalhes.`);
+            console.log(error);
+            return false;
+        }
+    }
+
+    static async atualizarCliente(cliente:Cliente): Promise<boolean> {
+        try{
+            const queryUpdateCliente = `UPDATE Cliente SET
+                                      nome  = '${cliente.getNome()}',
+                                      cpf = '${cliente.getCpf()}',
+                                      telefone = ${cliente.getTelefone()}
+                                      WHERE id_cliente = ${cliente.getIdCliente()};`;
+
+            console.log(queryUpdateCliente);
+
+          const respostaBD = await database.query(queryUpdateCliente);
+          if(respostaBD.rowCount != 0){
+            console.log(`Cliente atualizado com sucesso! ID:${cliente.getIdCliente()}`);
+            return true;
+          }             
+          
+          return false;
+        } catch (error) {
+            console.log(`Erro ao atualizar o cliente. Verifique os logs para mais detalhes.`);
+            console.log(error);
+            return false;
+        }
+    }
+    
 }
 
 

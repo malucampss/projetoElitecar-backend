@@ -85,6 +85,55 @@ class CarroController extends Carro{
             return res.status(400).json({ mensagem: "Não foi possível cadastrar o carro. Entre em contato com o administrador do sistema." });
         }
     }
+    static async remover(req: Request, res: Response): Promise<Response>{
+        try{
+            const idCarro = parseInt(req.params.idCarro as string);
+            const respostaModelo =  await Carro.removerCarro(idCarro);
+
+            if(respostaModelo) {
+               return res.status(200).json({mensagem: "O carro foi removido com sucesso!"});
+                
+
+            } else {
+                    return res.status(400).json({mensagem: "Erro ao remover o carro. Entre em contato com o administrador do sistema"});
+            }
+
+
+        }catch (error){
+            console.log(`Erro ao remover um carro. ${error}`);
+            return res.status(400).json ({mensagem: "Não foi possivel remover o carro. Entre em contato com o administrador do sistema."});
+        }
+    }
+
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try{
+            const carroRecebido: CarroDTO = req.body;
+            const idCarroRecebido = parseInt(req.params.idCarro as string);
+            const carroAtualizado = new Carro(
+                carroRecebido.marca,
+                carroRecebido.modelo,
+                carroRecebido.ano,
+                carroRecebido.cor
+            );
+
+            carroAtualizado.setIdCarro(idCarroRecebido);
+
+            const respostaModelo = await Carro.atualizarCarro(carroAtualizado);
+        
+            if(respostaModelo) {
+                return res.status(200).json({mensagem:"Carro atualizado com sucesso!"});
+
+            } else{
+                return res.status(400).json({mensagem: "Não foi possivel atualizar o carro. Entre em contato com o administrador do sistema."});
+            }
+        
+        } catch (error) {
+            console.log(`Erro ao atualizar um carro. ${error}`);
+
+            return res.status(400).json({mensagem: "Não foi possivel atualizar o  carro. Entre em contato com o administrador do sistema"});
+        }
+    }
+
 }
 
 export default CarroController;

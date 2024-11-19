@@ -223,4 +223,48 @@ export class PedidoVenda {
             return false;
         }
     }
+
+    static async removerPedidoVenda(idPedido: number): Promise<boolean> {
+        try{
+            const queryDeletePedidoVenda = `DELETE FROM pedido WHERE id_pedido = ${idPedido}`;
+            const respostaDB = await database.query(queryDeletePedidoVenda);
+
+            if(respostaDB.rowCount != 0){
+                console.log(`Pedido de venda removido com sucesso. ID removido: ${idPedido}`);
+                return true;
+            }
+            return false;
+
+        } catch (error) {
+            console.log(`Erro ao remover pedido de venda. Verifique os logs para mais detalhes.`);
+            console.log(error);
+            return false;
+        }
+    }
+
+    static async atualizarPedidoVenda(pedidoVenda:PedidoVenda): Promise<boolean> {
+        try{
+            const queryUpdatePedidoVenda = `UPDATE PedidoVenda SET
+                                      IdCarro  = '${pedidoVenda.getIdCarro()}',
+                                      IdCliente = '${pedidoVenda.getIdCliente()}',
+                                      DataPedido = ${pedidoVenda.getDataPedido()}
+                                      WHERE id_pedidoVenda = ${pedidoVenda.getIdPedido()};`;
+
+            console.log(queryUpdatePedidoVenda);
+
+          const respostaBD = await database.query(queryUpdatePedidoVenda);
+          if(respostaBD.rowCount != 0){
+            console.log(`Pedido de venda atualizado com sucesso! ID:${pedidoVenda.getIdPedido()}`);
+            return true;
+          }             
+          
+          return false;
+        } catch (error) {
+            console.log(`Erro ao atualizar o pedido de venda. Verifique os logs para mais detalhes.`);
+            console.log(error);
+            return false;
+        }
+    }
+
+
 }

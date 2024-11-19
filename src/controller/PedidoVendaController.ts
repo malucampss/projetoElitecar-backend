@@ -67,6 +67,60 @@ class PedidoVendaController extends PedidoVenda {
             return res.status(400).json({ mensagem: "Não foi possível cadastrar o carro. Entre em contato com o administrador do sistema." });
         }
     }
+
+
+    static async remover(req: Request, res: Response): Promise<Response>{
+        try{
+            const idPedido = parseInt(req.params.idPedido as string);
+            const respostaModelo =  await PedidoVenda.removerPedidoVenda(idPedido);
+
+            if(respostaModelo) {
+               return res.status(200).json({mensagem: "O pedido de venda foi removido com sucesso!"});
+                
+
+            } else {
+                    return res.status(400).json({mensagem: "Erro ao remover o pedido de venda. Entre em contato com o administrador do sistema"});
+            }
+
+
+        }catch (error){
+            console.log(`Erro ao remover um pedido de venda. ${error}`);
+            return res.status(400).json ({mensagem: "Não foi possivel remover o pedido de venda. Entre em contato com o administrador do sistema."});
+        }
+    }
+
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try{
+            const pedidoRecebido: PedidoVendaDTO = req.body;
+            const idPedidoRecebido = parseInt(req.params.idPedido as string);
+            const pedidoAtualizado = new Pedido(
+                pedidoRecebido.idCarro,
+                pedidoRecebido.idCliente,
+                pedidoRecebido.dataPedido,
+                pedidoRecebido.valorPedido,
+                
+            );
+
+            pedidoAtualizado.setIdPedido(idPedidoRecebido);
+
+            const respostaModelo = await PedidoVenda.atualizarPedidoVenda(pedidoAtualizado);
+        
+            if(respostaModelo) {
+                return res.status(200).json({mensagem:"Pedido atualizado com sucesso!"});
+
+            } else{
+                return res.status(400).json({mensagem: "Não foi possivel atualizar o pedido. Entre em contato com o administrador do sistema."});
+            }
+        
+        } catch (error) {
+            console.log(`Erro ao atualizar um pedido. ${error}`);
+
+            return res.status(400).json({mensagem: "Não foi possivel atualizar o  pedido. Entre em contato com o administrador do sistema"});
+        }
+    }
+
+
+
 }
 
 export default PedidoVendaController;
